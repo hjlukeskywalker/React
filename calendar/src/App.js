@@ -1,12 +1,11 @@
+/*eslint-disable*/
 import React from "react";
 import styled, { createGlobalStyle, ThemeProvider } from "styled-components";
 import { withRouter } from "react-router"; //
 import { Route, Switch } from "react-router-dom";
 
 // import {connect} from 'react-redux';
-import Header from "./Header";
 import Calendar from "./Calendar";
-import FloatingBtn from "./FloatingBtn";
 import Add from "./Add";
 import Detail from "./Detail";
 
@@ -58,32 +57,32 @@ class App extends React.Component {
     const {month} = this.state;
 
     return (
+      
       <APP>
-          <Route render={(props) => (<Header calendarDays={this.state.calendarDays} today={this.state.today}/>)}/>
         <Switch>
-          <Route path="/" exact render={(props) => (<Calendar calendarDays={this.state.calendarDays} />)}></Route>
+          <Route path="/" exact render={(props) => (<Calendar calendarDays={this.state.calendarDays} today={this.state.today} history={this.props.history}/>)}></Route>
           <Route path="/add" exact component={Add}></Route>
           <Route path="/detail" exact component={Detail}></Route>
         </Switch>
-        <Route component={FloatingBtn}/>
       </APP>
+      
     );
   }
 }
 
 const GlobalStyles = createGlobalStyle`
       body {
-        @import url('https://fonts.googleapis.com/earlyaccess/notosanskr.css');
-        font-family: "Noto Sans KR", sans-serif !important;
+        background-color: #dce1f2;
+  color: #444078;
+        /* @import url('https://fonts.googleapis.com/earlyaccess/notosanskr.css');
+        font-family: "Noto Sans KR", sans-serif !important; */
       }
     `;
 
 const APP = styled.div`
-  width: 100vw;
-  height: 100vh;
-  overflow: hidden;
-  /* justify-content: center; */
-  align-items: center;
+
+width:100%;
+height:100%;
   flex-direction: column;
   display: flex;
   margin: 0px auto;

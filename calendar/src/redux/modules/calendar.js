@@ -5,9 +5,9 @@ const NEXT_MONTH = "calendar/NEXT_MONTH"
 const RESET_DATE = "calendar/RESET_DATE"
 
 const initialState = {
-    today: new Date(),
-    month: today.getMonth(),
-    year: today.getFullYear(),
+    
+    thismonth: 5,
+    year: 2021,
 
         };
 
@@ -15,11 +15,11 @@ const initialState = {
 export const loadDate = (date) =>{
     return {type:LOAD_DATE, date};
 };
-export const prevMonth = (month) =>{
-    return {type:PREV_MONTH, month};
+export const prevMonth = (thismonth) =>{
+    return {type:PREV_MONTH, thismonth};
 };
-export const nextMonth = (month) =>{
-    return {type:NEXT_MONTH, month};
+export const nextMonth = (thismonth) =>{
+    return {type:NEXT_MONTH, thismonth};
 
 };
 export const resetDate = () =>{
@@ -32,11 +32,19 @@ export default function reducer(state = initialState, action){
             return state;
         }
         case "calendar/PREV_MONTH":{
-            return {...state, month: state.month +1};
+            if(state.thismonth === 1){
+                return {...state, thismonth: state.thismonth+11, year:state.year-1}
+            } return {...state, thismonth:state.thismonth-1}
+            
         }
         case "calendar/NEXT_MONTH":{
-            return {...state, answer: []};
+            if(state.thismonth===12){
+                return {...state, thismonth: state.thismonth-11, year:state.year+1};
+            } return {...state, thismonth:state.thismonth+1};
 
+        }
+        case"calendar/RESET_DATE":{
+            return state;
         }
 
         default:
