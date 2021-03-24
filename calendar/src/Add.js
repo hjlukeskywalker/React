@@ -5,7 +5,12 @@ const Add = (props)=>{
     console.log(props);
 
     return(
-        <div>일정추가 페이지</div>
+        <div>
+            
+            <input type="text"></input>
+            <input type="text"></input>
+
+        </div>
     );
 
 
