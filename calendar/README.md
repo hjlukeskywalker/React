@@ -1,6 +1,6 @@
 # React Calendar Project
 캘린더 라이브러리없이 구현해 본 React 프로젝트입니다.
-<center><img src="https://user-images.githubusercontent.com/68773118/112478036-e6c27500-8db6-11eb-9b27-2fffbd578e07.png" width="60%"></center>
+<center><img src="https://user-images.githubusercontent.com/68773118/112478036-e6c27500-8db6-11eb-9b27-2fffbd578e07.png" width="70%"></center>
 
 ### 사용한 패키지 및 CSS
 
