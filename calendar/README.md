@@ -19,8 +19,7 @@
     등록된 일정들을 전역 상태관리하기 위하여 사용했습니다. Action, ActionCreator , Reducer를 한 파일에 명시하는 Ducks pattern으로 작업하였습니다. 
     (구조 설명 [https://github.com/erikras/ducks-modular-redux](https://github.com/erikras/ducks-modular-redux))
 
-<center><img src="https://user-images.githubusercontent.com/68773118/112489654-fdba9480-8dc1-11eb-8daf-1f38193ad8cf.png
-" height="400px"></center>
+<center><img src="https://user-images.githubusercontent.com/68773118/112490586-d7492900-8dc2-11eb-9491-5200f87c943f.png" height="400px"></center>
   
 
 - BaaS
