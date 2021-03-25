@@ -2,12 +2,18 @@
 const LOAD_DATE = "calendar/LOAD_DATE"
 const PREV_MONTH = "calendar/PREV_MONTH"
 const NEXT_MONTH = "calendar/NEXT_MONTH"
-const RESET_DATE = "calendar/RESET_DATE"
+const ADD_SCHEDULE = "calendar/ADD_SCHEDULE"
 
 const initialState = {
     
     thismonth: 5,
     year: 2021,
+    schedules: [
+        {date:"2021-03-25T22:05", desc:"도리 쓰다듬기", completed:false},
+        {date:"2021-03-25T19:17", desc:"캘린더 사용하기", completed:false},
+        {date:"2021-03-26T02:17", desc:"심야 디버깅", completed:false},
+
+    ],
 
         };
 
@@ -22,8 +28,8 @@ export const nextMonth = (thismonth) =>{
     return {type:NEXT_MONTH, thismonth};
 
 };
-export const resetDate = () =>{
-    return {type:RESET_DATE};
+export const addSchedule = (date,desc) =>{
+    return {type:ADD_SCHEDULE, date, desc};
 };
 //Reducer
 export default function reducer(state = initialState, action){
@@ -43,8 +49,9 @@ export default function reducer(state = initialState, action){
             } return {...state, thismonth:state.thismonth+1};
 
         }
-        case"calendar/RESET_DATE":{
-            return state;
+        case "calendar/ADD_SCHEDULE":{
+            const new_schedules = [...state.schedules,{date:action.date, desc:action.desc, completed:false}];
+            return {schedules:new_schedules};
         }
 
         default:
