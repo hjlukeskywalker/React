@@ -30,7 +30,7 @@
 
 - 월 이동 기능
 
-    JavaScript의 date함수를 이용하여 해당 월의 1일이 시작하는 요일(달력 표기가 시작되는 지점)과 마지막 날짜(달력 표기가 끝나는 지점)를 구하고 이를 배열로 저장하여 하였습니다.
+    JavaScript의 date함수를 이용하여 해당 월의 1일이 시작하는 요일(달력 표기가 시작되는 지점)과 마지막 날짜(달력 표기가 끝나는 지점)를 구하고 이를 배열로 저장하여 렌더링하였습니다.
 
 - 일정 클릭 시 모달창에 상세 내용 표기
 
@@ -54,7 +54,7 @@
 
 ### 폴더 구조
 
-<center><img src="[https://user-images.githubusercontent.com/68773118/112478537-76682380-8db7-11eb-923e-2d454e7aff56.png](https://user-images.githubusercontent.com/68773118/112478537-76682380-8db7-11eb-923e-2d454e7aff56.png)" height="400px"></center>
+<center><img src="https://user-images.githubusercontent.com/68773118/112478537-76682380-8db7-11eb-923e-2d454e7aff56.png" height="400px"></center>
 
 ### 앞으로 개선할 점
 
