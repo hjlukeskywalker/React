@@ -7,7 +7,7 @@
 - styled component => CSS in JS 
 
 ### 폴더 구조
-<center><img src="https://user-images.githubusercontent.com/68773118/112478537-76682380-8db7-11eb-923e-2d454e7aff56.png" height="30%"></center>
+<center><img src="https://user-images.githubusercontent.com/68773118/112478537-76682380-8db7-11eb-923e-2d454e7aff56.png" height="300px"></center>
 
 ### 구현 기능 및 동작 원리
 
