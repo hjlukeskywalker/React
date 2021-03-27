@@ -2,26 +2,27 @@ import React from "react";
 import styled from "styled-components";
 
 const Button = (props)=>{
-    const { children, bold, color,size} = props;
-
-    const styles = {bold:bold, color:color, size:size};
+    const {text, _onClick} = props;
     return(
-<Btn {...styles}>{children}</Btn>
+        <React.Fragment>
+        <ElButton onClick={_onClick}>{text}</ElButton>
+      </React.Fragment>
     );
 };
 
 Button.defaultProps = {
-children : null,
-bold: false,
-color: "#222831",
-size: "12px",
+    text: "텍스트",
+    _onClick: () => {}
 };
 
-const Btn = styled.button`
-width:
-color:${(props)=>props.color};
-font-size:${(props)=>props.size};
-font-weight:${(props)=>(props.bold? "600":"400")};
+
+const ElButton = styled.button`
+    width: 100%;
+    background-color: #212121;
+    color: #ffffff;
+    padding: 12px 0px;
+    box-sizing: border-box;
+    border: none;
 `;
 
 export default Button;
