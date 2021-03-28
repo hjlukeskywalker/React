@@ -3,6 +3,9 @@ import styled from "styled-components";
 
 const Button = (props)=>{
     const {text, _onClick} = props;
+
+   
+
     return(
         <React.Fragment>
         <ElButton onClick={_onClick}>{text}</ElButton>
