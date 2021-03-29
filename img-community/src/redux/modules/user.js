@@ -33,7 +33,8 @@ const loginFB = (id, pwd) => {
           console.log(user);
           dispatch(setUser({ 
               user_name: user.user.displayName,
-              id: id, user_profile: "" }));
+              id: id, user_profile: "",
+            uid:user.user.uid, }));
           history.push("/");
         })
         .catch((error) => {
@@ -58,7 +59,7 @@ const signupFB = (id, pwd, user_name) => {
           })
           .then(() => {
             dispatch(
-              setUser({ user_name: user_name, id: id, user_profile: "" })
+              setUser({ user_name: user_name, id: id, user_profile: "",uid:user.user.uid, })
             );
             history.push("/");
           })
@@ -76,6 +77,34 @@ const signupFB = (id, pwd, user_name) => {
   };
 };
 
+const loginCheckFB = () =>{
+    return function(dispatch, getState, {history}){
+        auth.onAuthStateChanged((user)=> {
+            if(user){
+                dispatch(setUser({
+                    user_name:user.displayName,
+                    user_profile:"",
+                    id:user.email,
+                    uid:user.uid,
+                })
+                 
+                )
+            }else{
+                dispatch(logOut());
+            }
+        })
+    }
+}
+
+const logoutFB = () =>{
+    return function (dispatch, getState, {history}) {
+auth.signOut().then(()=>{
+    dispatch(logOut());
+    history.replace("/");
+    //뒤로가기해도 원래 페이지가 나오지 않음.
+})
+    }
+}
 //reducer produce (immer) 통해서 불변성 유지
 // immer가 복사한 값을 draft로 받아 저장한다는 의미.
 export default handleActions(
@@ -103,6 +132,8 @@ const actionCreators = {
   getUser,
   loginFB,
   signupFB,
+  loginCheckFB,
+  logoutFB,
 };
 
 export { actionCreators };

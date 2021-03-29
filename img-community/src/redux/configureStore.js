@@ -4,11 +4,15 @@ import { createBrowserHistory } from "history";
 import { connectRouter } from "connected-react-router";
 
 import User from "./modules/user";
+import Post from "./modules/post";
+import Image from "./modules/image.js";
 
 export const history = createBrowserHistory();
 
 const rootReducer = combineReducers({
   user: User,
+  post:Post,
+  image:Image,
   router: connectRouter(history),
 });
 
@@ -17,7 +21,7 @@ const rootReducer = combineReducers({
   //환경 정보 : 개발환경, 프로덕션(배포)환경 ...)
   const env = process.env.NODE_ENV;
   
-  //로거사용
+  //개발환경일 때 로거사용
   if (env === "development") {
     const { logger } = require("redux-logger");
     middlewares.push(logger);

@@ -8,7 +8,6 @@ const Post = (props) => {
             <Grid is_flex padding="16px">
                 <Grid is_flex width="auto">
                 <Image shape="circle" src={props.user_info.user_profile}></Image>
-                <Text bold></Text>
                 <Text bold>{props.user_info.user_name}</Text>
                 </Grid>
            <Grid is_flex width="auto">
@@ -21,7 +20,7 @@ const Post = (props) => {
                 <Image shape="rectangle" src={props.image_url}/>
             </Grid>
             <Grid padding="16px">
-                <Text bold>댓글 {props.comment_cnt}개</Text>
+                <Text margin="0" bold>댓글 {props.comment_cnt}개</Text>
             </Grid>
        
         </React.Fragment>
