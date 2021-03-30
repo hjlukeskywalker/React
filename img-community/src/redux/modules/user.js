@@ -101,7 +101,7 @@ const logoutFB = () =>{
 auth.signOut().then(()=>{
     dispatch(logOut());
     history.replace("/");
-    //뒤로가기해도 원래 페이지가 나오지 않음.
+    //replace는 push와 달리 뒤로가기해도 원래 페이지가 나오지 않음.
 })
     }
 }

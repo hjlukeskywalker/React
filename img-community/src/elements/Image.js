@@ -23,7 +23,7 @@ const {shape, src, size} = props;
        }
        return (
         <React.Fragment>
-            
+            <ImageDefault {...styles}></ImageDefault>
         </React.Fragment>
        );
     
@@ -53,5 +53,14 @@ border-radius: var(--size);
 background-image: url("${(props)=>props.src}");
 background-size:cover;
 margin:4px;
+`;
+const ImageDefault = styled.div`
+--size : ${(props)=>props.size}px;
+width: var(--size);
+height: var(--size);
+/* border-radius: var(--size); */
+background-image: url("${(props)=>props.src}");
+background-size:cover;
+/* margin:4px; */
 `;
 export default Image;

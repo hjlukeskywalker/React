@@ -12,11 +12,16 @@ const Upload = ()=>{
     const fileInput = React.useRef();
 
     const selectFile = (e)=>{
-        console.log(e);
-    console.log(e.target);
-    console.log(e.target.files[0]);
-
     console.log(fileInput.current.files[0]);
+
+    const reader = new FileReader();
+    const file = fileInput.current.files[0];
+    reader.readAsDataURL(file);
+    //읽기가 끝나면 발생하는 이벤트 핸들러로 값을 받아온다.
+    reader.onloadend = ()=>{
+        console.log(reader.result);
+        dispatch(imageActions.setPreview(reader.result));
+    }
     }
 
     const uploadFB = () =>{

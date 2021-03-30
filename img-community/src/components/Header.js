@@ -15,8 +15,6 @@ const Header = (props) => {
 
   const is_session = sessionStorage.getItem(_session_key)? true : false;
   
-  console.log(is_session);
-
   if (is_login && is_session) {
     return (
       <React.Fragment>
@@ -29,7 +27,7 @@ const Header = (props) => {
 
           <Grid is_flex>
             <Button text="내정보"></Button>
-            <Button text="알림"></Button>
+            <Button text="알림" _onClick={()=>{history.push("/noti")}}></Button>
             <Button
               text="로그아웃"
               _onClick={() => {

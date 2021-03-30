@@ -5,13 +5,15 @@ import {storage} from "../../shared/firebase";
 //action type
 const UPLOADING = "UPLOADING";
 const UPLOAD_IMAGE = "UPLOAD_IMAGE";
+const SET_PREVIEW = "SET_PREVIEW";
 //action creator
 const uploading = createAction(UPLOADING, (uploading)=>({uploading}));
 const uploadImage = createAction(UPLOAD_IMAGE, (image_url)=>({image_url}));
-
+const setPreview = createAction(SET_PREVIEW, (preview)=>({preview}));
 const initialState = {
     image_url:"",
     uploading: false,
+    preview: null,
 }
 export default handleActions({
     [UPLOAD_IMAGE]: (state, action) => produce(state, (draft)=>{
@@ -21,6 +23,9 @@ draft.uploading = false;
     }),
     [UPLOADING]: (state, action) => produce(state, (draft) =>{
 draft.uploading = action.payload.uploading;
+    }),
+    [SET_PREVIEW]: (state, action)=> produce(state,(draft)=> {
+        draft.preview = action.payload.preview;
     })
 }, initialState);
 
@@ -45,6 +50,7 @@ _upload.then((snapshot)=>{
 const actionCreators = {
     uploadImage,
     uploadImageFB,
+    setPreview,
 }
 
 export {actionCreators};
