@@ -4,7 +4,7 @@ import { Text, Grid } from "./index";
 import styled from "styled-components";
 
 const Input = (props) => {
-  const { placeholder, is_Submit, label, _onChange, type, multiline, value } = props;
+  const { placeholder, is_Submit,onSubmit, label, _onChange, type, multiline, value } = props;
 
   if (multiline) {
     return (
@@ -25,7 +25,11 @@ const Input = (props) => {
       <Grid>
         {label && <Text margin="0px">{label}</Text>}
         {is_Submit?
-        <ElInput type={type} value={value} placeholder={placeholder} onChange={_onChange} />:
+        <ElInput onKeyPress={(e)=>{
+            if(e.key === "Enter"){
+                onSubmit(e);
+            }
+        }} type={type} value={value} placeholder={placeholder} onChange={_onChange} />:
         <ElInput type={type} placeholder={placeholder} onChange={_onChange} />}
       </Grid>
     </React.Fragment>
@@ -39,6 +43,7 @@ Input.defaultProps = {
   _onChange: () => {},
   value: "",
   is_Submit:false,
+  onSubmit:()=>{},
 };
 
 const ElInput = styled.input`

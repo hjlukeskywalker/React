@@ -1,10 +1,11 @@
 import React from "react";
 import _ from "lodash";
 import {Spinner} from "../elements";
+import {useSelector} from "react-redux";
 
 const InfinityScroll = (props) => {
   const { children, callNext, is_next, loading } = props;
-
+  const paging = useSelector((state)=> state.post.paging);
   const _handleScroll = _.throttle(() => {
     const { innerHeight } = window;
     const { scrollHeight } = document.body;
@@ -20,6 +21,8 @@ const InfinityScroll = (props) => {
       callNext();
     }
   }, 300);
+  console.log("스크롤", is_next);
+  console.log("스크롤",paging.next? true:false);
 
   const handleScroll = React.useCallback(_handleScroll, [loading]);
 

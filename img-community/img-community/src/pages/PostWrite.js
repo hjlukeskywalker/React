@@ -19,6 +19,9 @@ const {history} = props;
 let _post = is_edit? post_list.find((p)=> p.id === post_id) : null;
 
 const [contents, setContents] = React.useState(_post? _post.contents:"");
+const [layout_type, setLayoutType] = React.useState(
+    _post ? _post.layout_type : ""
+  );
 
 React.useEffect(()=>{
 if(is_edit && !_post){
@@ -32,15 +35,18 @@ if(is_edit){
     dispatch(imageActions.setPreview(_post.image_url));
 }
 }, []);
-
+const changeLayoutType = (e) => {
+    console.log(e.target.value);
+    setLayoutType(e.target.value);
+  };
 const changeContents = (e) =>{
     setContents(e.target.value);
 }
 const addPost = () =>{
-    dispatch(postActions.addPostFB(contents));
+    dispatch(postActions.addPostFB(contents, layout_type));
 }
 const editPost =()=>{
-    dispatch(postActions.editPostFB(post_id,{contents: contents}));
+    dispatch(postActions.editPostFB(post_id,{contents: contents, layout_type:layout_type}));
 }
 if(!is_login){
     return(
@@ -66,13 +72,27 @@ if(!is_login){
        <Image shape="rectangle" src={preview? preview:"http://via.placeholder.com/400x300"}></Image>
 
    </Grid>
+   <Grid padding="0 16px">
+       
+   </Grid>
+   <Grid padding="16px">
+    <Text margin="0">레이아웃</Text>
+    <select onChange={changeLayoutType} value={layout_type}>
+    <option value="center">center</option>
+    <option value="left">left</option>
+    <option value="right">right</option>
+    
+</select>
+   </Grid>
+
    <Grid padding="16px">
        <Input value={contents} _onChange={changeContents} multiline label="게시글 내용" placeholder="게시글 작성"></Input>
    </Grid>
+ 
    <Grid padding="16px">
    {is_edit? ( <Button _onClick={editPost}>게시글 수정</Button>)
    :( <Button _onClick={addPost}>게시글 작성</Button>)}
-      
+         
    </Grid>
 </React.Fragment>
     );

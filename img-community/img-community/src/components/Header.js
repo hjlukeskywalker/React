@@ -7,6 +7,9 @@ import { useSelector, useDispatch } from "react-redux";
 import { actionCreators as userActions } from "../redux/modules/user";
 import { history } from "../redux/configureStore";
 import { apiKey } from "../shared/firebase";
+import NotiBadge from "./NotiBadge";
+import PersonIcon from '@material-ui/icons/Person';
+import LockOpenIcon from '@material-ui/icons/LockOpen';
 const Header = (props) => {
   const dispatch = useDispatch();
   const is_login = useSelector((state) => state.user.is_login);
@@ -17,22 +20,24 @@ const Header = (props) => {
   if (is_login && is_session) {
     return (
       <React.Fragment>
-        <Grid is_flex padding="4px 16px">
-          <Grid _onClick={history.push("/")}>
+        <Grid bg="#FFD600" is_flex padding="4px 16px">
+          <Grid _onClick={()=>history.push("/")} >
             <Text margin="0px" size="24px" bold>
-              헬로
+              Hello
             </Text>
           </Grid>
 
-          <Grid is_flex>
-            <Button text="내정보"></Button>
-            <Button text="알림" _onClick={()=>{history.push("/noti")}}></Button>
-            <Button
-              text="로그아웃"
+          <Grid is_flex width="200px">
+            <Grid padding="5px 0 0 0" width="auto"><PersonIcon fontSize="large"/></Grid>
+            <Grid width="auto">
+            <NotiBadge  _onClick={()=>{history.push("/noti")}}></NotiBadge>
+            </Grid>
+           
+            <Grid padding="5px 0 0 0" width="auto"
               _onClick={() => {
                 dispatch(userActions.logoutFB());
               }}
-            ></Button>
+            ><LockOpenIcon fontSize="large"/></Grid>
           </Grid>
         </Grid>
       </React.Fragment>
@@ -41,22 +46,22 @@ const Header = (props) => {
 
   return (
     <React.Fragment>
-      <Grid is_flex padding="4px 16px">
-        <Grid _onClick={history.push("/")}>
+      <Grid  bg="#FFD600" is_flex padding="4px 16px" >
+        <Grid _onClick={history.push("/")} width="150%">
           <Text margin="0px" size="24px" bold>
-            헬로
+            Hello
           </Text>
         </Grid>
 
         <Grid is_flex>
-          <Button
-            text="로그인"
+          <Button bg="#FFD600" color="#212121" bold
+            text="Login"
             _onClick={() => {
               history.push("/login");
             }}
           ></Button>
-          <Button
-            text="회원가입"
+          <Button bg="#FFD600" color="#212121" bold
+            text="Signup"
             _onClick={() => {
               history.push("/signup");
             }}

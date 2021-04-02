@@ -30,7 +30,7 @@ const {shape, src, size} = props;
 }
 Image.defaultProps={
     shape: "circle",
-    src: "https://yt3.ggpht.com/ytc/AAUvwnhyh4Zo58irFscLyvbR71t4-MAWYAu1GyDy2LLy=s900-c-k-c0x00ffffff-no-rj",
+    src: "https://blog.kakaocdn.net/dn/cyOIpg/btqx7JTDRTq/1fs7MnKMK7nSbrM9QTIbE1/img.jpg",
     size: 36,
 }
 const AspectOutter = styled.div`

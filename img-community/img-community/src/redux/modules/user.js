@@ -3,6 +3,7 @@ import { produce } from "immer";
 import { getCookie, setCookie, deleteCookie } from "../../shared/Cookie";
 import { auth } from "../../shared/firebase";
 import firebase from "firebase/app";
+import { firestore, realtime } from "../../shared/firebase";
 
 const LOG_OUT = "LOG_OUT";
 const GET_USER = "GET_USER";
@@ -33,7 +34,7 @@ const loginFB = (id, pwd) => {
           console.log(user);
           dispatch(setUser({ 
               user_name: user.user.displayName,
-              id: id, user_profile: "",
+              id: id,
             uid:user.user.uid, }));
           history.push("/");
         })
@@ -59,8 +60,9 @@ const signupFB = (id, pwd, user_name) => {
           })
           .then(() => {
             dispatch(
-              setUser({ user_name: user_name, id: id, user_profile: "",uid:user.user.uid, })
+              setUser({ user_name: user_name, id: id, user_profile: "https://blog.kakaocdn.net/dn/cyOIpg/btqx7JTDRTq/1fs7MnKMK7nSbrM9QTIbE1/img.jpg",uid:user.user.uid, })
             );
+            realtime.ref(`noti/`+user.user.uid).set({read:true});
             history.push("/");
           })
           .catch((error) => {
@@ -83,7 +85,7 @@ const loginCheckFB = () =>{
             if(user){
                 dispatch(setUser({
                     user_name:user.displayName,
-                    user_profile:"",
+                    user_profile:"https://blog.kakaocdn.net/dn/cyOIpg/btqx7JTDRTq/1fs7MnKMK7nSbrM9QTIbE1/img.jpg",
                     id:user.email,
                     uid:user.uid,
                 })
