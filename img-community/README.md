@@ -1,6 +1,9 @@
 
 
 # React 이미지 기반 SNS
+
+https://media.vlpt.us/images/mygomi/post/6c3df6ab-5741-455e-9243-12f8ebff38cf/ezgif.com-gif-maker%20(6).gif
+
 #### (2021.03.28 ~ 2021.04.01)
 두번째✌ 리액트 프로젝트를 마쳤습니다. 리액트를 빠르게 습득한 뒤 팀 프로젝트를 진행하고자 했기에 디자인적 디테일보다는 기능 구현에 힘썼습니다. 
 #### 구현기능
