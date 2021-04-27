@@ -6,7 +6,7 @@
 ### 2. [Image Community : 나만의 인⭐그램](#React-이미지-기반-SNS)
 
 # React Calendar Project
-캘린더 라이브러리없이 구현해 본 React 프로젝트입니다.
+## 캘린더 라이브러리없이 구현해 본 React 프로젝트입니다.
 
 <center><img src="https://user-images.githubusercontent.com/68773118/112478036-e6c27500-8db6-11eb-9b27-2fffbd578e07.png" width="75%"></center>
 
