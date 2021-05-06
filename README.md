@@ -14,7 +14,7 @@
 
 ## 목차
 1. [프로젝트 소개](#프로젝트-소개)
-2. [사용 기술](#Tools-&-Packages)
+2. [사용 기술](#Tools--Packages)
 3. [폴더 구조](#폴더구조-컴포넌트-세분화)
 4. [기능 구현 방식](#기능별-코드리뷰)
 5. [도전하고 싶은 점](#도전하고-싶은점)
@@ -45,9 +45,11 @@
 
 ## Tools & Packages
 
-CRA (Create-React-App)를 이용한 React 개발환경 구축
+View (React with JavaScript, React-Router, material-UI, Styled-components)
+Build Tool (Create React App)
+Infrastructure (AWS S3, Route 53)
 
-**디자인관련**
+**Design**
 styled component
 material UI
 Figma (UI/UX design tool) - 와이어프레임 
@@ -56,9 +58,12 @@ Figma (UI/UX design tool) - 와이어프레임
 React developer Tools : 리액트 디버깅에 도움이 된다고 하는데 다른 이들의 활용사례를 접하며 익숙해져야 할 것 같습니다.
 Redux devTools : logger 사용이 안되어서 이 프로그램을 유용하게 사용했습니다.
 
-**데이터관리**
+**State Management**
 Redux와 Firebase를 사용했습니다.
 : User, Post, Comment, 사용자가 업로드하는 이미지 파일 등 관리 대상이 증가함에 따라 리덕스 모듈을 4개로 만들어 사용하였고 combineReducers를 이용해 하나의 리듀서로 만들었습니다.
+Firebase
+: realtime database (실시간 알림), cloud storage (이미지 업로드), authentication (로그인 인증)
+
 ```
 yarn add 
 redux react-redux redux-thunk //리덕스와 미들웨어
