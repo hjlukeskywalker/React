@@ -8,7 +8,7 @@
 ### 1. [프로젝트 소개](#프로젝트-소개)
 ### 2. [사용 기술](#Tools-&-Packages)
 ### 3. [폴더 구조](#폴더구조-컴포넌트-세분화)
-### 4. [기능 구현 방식](#기능별-코드리뷰)
+### 4. [기능 구현 방식](#기능별-리뷰)
 ### 5. [도전하고 싶은 점](#도전하고-싶은점)
 ### 6. [배운 점](#배운-점)
 
@@ -72,11 +72,149 @@ React의 큰 장점이라 하는 컴포넌트 재사용을 경험해보기 위�
 
 ---
 
-## 기능별 코드리뷰
+## 기능별 리뷰
 
 ![image](https://user-images.githubusercontent.com/68773118/116310831-752a7c00-a7e5-11eb-8256-ab1667e33468.png)
 
-작성 중
+
+# React 이미지 기반 SNS
+(2021.03.28 ~ 2021.04.01)
+두번째✌ 리액트 프로젝트
+
+## 구현기능
+이미지 기반 SNS의 주요 기능들을 구현해보았다.
+- 게시물 무한 스크롤
+- 게시물작성/수정
+- 이미지 업로드 기능
+- 댓글
+- 좋아요
+- 유저별 실시간 알림
+- 로그인/회원가입
+
+![](https://images.velog.io/images/mygomi/post/4794a43f-0e47-4d7f-a692-452c5a741b0d/ezgif.com-gif-maker%20(5).gif)
+
+
+---
+
+## 📝 기능별 리뷰
+## 1. 무한 스크롤
+(목적) 
+첫 로딩 시 모든 데이터를 받아오지 않고 무한스크롤을 이용하여 사용자의 체감 로딩 속도를 줄임
+(사용기술)
+throttle로 이벤트를 관리하기 위해 lodash 라이브러리를 이용
+firestore 쿼리로 작성일 기준 정렬
+
+![](https://images.velog.io/images/mygomi/post/9d748f79-842f-41ae-ae91-aebae845a0a9/image.png)
+
+1. Paging 처리
+	- 시작점 이후 포스트가 없다면 return;
+	- 이후 포스트가 있다면 시작점으로 부터 size+1만큼의 포스트를 가져온다. (size+1을 가져오는 이유는 다음 페이지가 존재하는 지를 확인하기 위함이다.)
+	- Paging 객체 프로퍼티(start, next) 수정
+	- 가져온 데이터 중 size만큼의 포스트를 렌더링
+2. InfinityScroll
+	- throttle로 다음 페이징 정보를 불러오는 콜백함수와 관리할 이벤트 시간을 설정함.
+	- useEffect를 이용하여 loading 중이 아니고 다음 포스트가 존재한다면 scroll event 발생 시 
+	- throttle이 작동하도록 구독하고 다음 페이지가 없거나 컴포넌트가 사라지면 해당 이벤트를 클린업한다. 
+3. 스크롤 영역을 계산
+	- 매 스크롤마다 3개 포스팅 로딩이 발생해선 안된다.
+	- throttle에 스크롤 영역 조건을 추가한다.
+4. Spinner 적용
+	- 로딩 중임을 알려 사용자 이탈을 방지
+5. 상세 페이지 처리
+	- 무한 스크롤 되지 않은 포스트를 링크를 통해 직접 상세 페이지로 이동하고자 한다면? 데이터 불러오기 전으로 오류 발생
+	- 무한 스크롤을 통해 리덕스에 저장된 데이터가 없는 상태라면 firebase에서 단일 데이터를 불러오는 코드 추가
+
+## 2. 게시물 작성/수정
+1. 로그인 여부 판단
+2. `post_id` 존재 여부로 작성/수정 확인하여 페이지 제목과 버튼 내용 분기처리
+3. 수정인 경우 기존 포스트의 이미지와 콘텐츠 불러와 보여주기
+4. 게시글 레이아웃 선택 가능하도록 함
+- select box value에 따라 JSX 레이아웃을 다르게 렌더링함
+
+## 3. 이미지 업로드 기능
+![](https://images.velog.io/images/mygomi/post/30b2e522-5f31-45c2-8249-eb29aeff17ae/image.png)
+
+(사용기술)
+파일 업로드가 가능한 firebase Storage 이용
+[input type="file"](https://developer.mozilla.org/ko/docs/Web/HTML/Element/Input/file)
+[FileReader](https://developer.mozilla.org/ko/docs/Web/API/FileReader)
+
+1. onChange에서 파일 객체를 가져와서 state에 저장해뒀다가 
+2. 저장 버튼을 누르면 firebase의 Storage에 저장
+3. Preview  기능
+	- 파일 선택 > 이미지 URL 추출 > 미리보기 이미지 표시
+
+## 4. 댓글
+- 댓글 작성 시 포스트 목록에 보이는 포스트 댓글 개수도 수정이 필요함.
+
+![](https://images.velog.io/images/mygomi/post/f95bbe99-9ce7-444f-be63-70e971661d46/image.png)
+
+```js
+// redux/modules/comment.js 
+...
+  if (post) {
+            dispatch(
+              postActions.editPost(post_id, {
+                comment_cnt: parseInt(post.comment_cnt) + 1,
+              })
+            );
+```
+- 댓글 추가 (Button & onKeyPress Enter)
+
+## 5. 좋아요
+
+(사용기술)
+- firestore에 like DB 별도 생성
+    - post DB 내에 like 항목을 추가하려 했으나 좋아요 유저가 늘어나는 경우 더 이상 좋아요가 불가능하다는 등의 에러가 발생할 수 있다고 하여 별도 DB로 분리하였음.
+1. 하트 버튼에 좋아요 토글 함수 연결
+- 좋아요된 상태라면 likeDB 데이터와 postDB 데이터의 like_cnt를 -1
+- 리덕스 데이터 변경
+- 좋아요가 되어 있지않다면 반대로 likeDB와 postDB에 like_cnt를 추가
+2. 좋아요 여부에 따라 하트버튼 분기처리
+- post_list와 likeDB의 post_id를 대조
+- likeDB에는 post_id를 key값으로 두고 좋아요를 누른 user_id 배열이 value로 저장되어 있음.
+- 좋아요를 누른 user 배열안에 id와 로그인한 user의 id가 일치한다면 is_like을 true로 바꾸어 하트버튼 색을 변경해줌.
+
+## 6. 알림
+(사용기술)
+material ui의 badge, icon
+realtime DB
+
+- 알림 발생 조건
+	내가 작성한 게시물인가?
+    타인이 작성한 댓글과 좋아요인가?
+- 알림 확인 여부에 따라 알림 on/off
+- 알림 아이콘 클릭 시 알림 내역 표시
+각 카드에는 포스트로 이동하는 경로 연결
+```js
+_onClick={() =>
+{history.push(`/post/${post_id}`);}}
+```
+![](https://images.velog.io/images/mygomi/post/6e277f75-2a40-4db2-bf2b-342128322693/image.png)
+
+## 7. 로그인/회원가입
+- 모듈화한 정규표현식으로 이메일 정합성 체크
+```js
+//shared/common.js
+export const emailCheck = (email) => {
+    let _reg = /^[0-9a-zA-Z]([-_.0-9a-zA-Z])*@[0-9a-zA-Z]([-_.0-9a-zA-z])*.([a-zA-Z])*/;
+
+    return _reg.test(email);
+}
+```
+- Firebase Authentication 이용하여 파이어베이스에 회원가입 연동
+  1. firebase.js에 만들어둔 auth 가져오기 (import)
+  2. 리덕스에서 signupFB 함수 만들기
+  3. auth.createUserWithEmailAndPassword()로 가입 시키기
+  4. Signup 컴포넌트에서 signupFB를 호
+  5. 가입한 후, display_name 바로 업데이트하기
+  6. 사용자 정보 업데이트 후에 메인 페이지로 이동하기
+- 파이어베이스를 통해 로그인 상태를 확인하여 리덕스에서 유저 정보 유지
+  1. firebase.js에 만들어둔 auth 가져오기 (import)
+  2. 리덕스에서 loginFB 함수 만들기
+  3. auth.signInWithEmailAndPassword()로 로그인
+  4. Login 컴포넌트에서 loginFB를 호출
+  5. 리덕스의 user 정보 업데이트 후에 메인 페이지로 이동하기
 
 ---
 
